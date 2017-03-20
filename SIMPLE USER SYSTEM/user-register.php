@@ -1,4 +1,6 @@
-<?php namespace ProcessWire; ?>
+<?php namespace ProcessWire;
+        $username = $email = $pass = "";?>
+        
 <div id="main">
 
   <h1>User Register</h1>
@@ -6,56 +8,65 @@
   <?php if($user->isLoggedin()) : ?>
 
     <h1>You Must Logout To Register</h1>
-    <a href="<?=$pages->get('/logout/')->url?>">Loogout</a>
-    
+    <a href="<?=$pages->get('/logout/')->url?>">Logout</a>
+
  <?php else: ?>
 
   <form class="" action="./" method="post">
-
-    <input type="text" name="name" value="Name">
-    <input type="email" name="email" value="E-Mail">
-    <input type="password" name="password" value="Password">
-    <input type="submit" name="" value="Submit">
-
+		Name: <input type="text" name="name" value="" maxlength="55"><br>
+		E-Mail: <input type="email" name="email" value="E-Mail" maxlength="55"><br>
+		Password: <input type="password" name="password" value="" maxlength="55"><br>
+    <input type="submit" name="sub" value="Submit">
   </form>
 
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $username = $input->name;
 $email = $input->email;
 $pass = $input->password;
 
-if($username != '' && $email !='' && $pass !='' ) {
+if ($sanitizer->email($email)) {
 
-  $u_n = wire('users')->get("name=$username");
-  $u_e = wire('users')->get("email=$email");
+  if( !empty($username) && !empty($email) && !empty($pass) ) {
 
-  if($u_e !='') {
-      echo "This E-Mail Exsist";
-    }
+    $u_n = wire('users')->get("name=$username");
+    $u_e = wire('users')->get("email=$email");
 
-    if($u_n !='') {
-        echo "This User Name Exsist";
+    if($u_e !='') {
+        echo "This E-Mail Exsist";
       }
 
-if ($u_e =='' && $u_n =='') {
+      if($u_n !='') {
+          echo "This User Name Exsist";
+        }
 
-//USER SAVE TO DB => http://cheatsheet.processwire.com/user/user-methods/user-save/
-  $item = new User();
+  if ($u_e =='' && $u_n =='') {
 
-    $item->setOutputFormatting(false);
-    $item->name = $sanitizer->pageName($username);
-    $item->pass = $pass;
-    $item->email = $sanitizer->email($email);
-    $item->addRole('guest');
-    $item->save();
+  //USER SAVE TO DB => http://cheatsheet.processwire.com/user/user-methods/user-save/
+    $item = new User();
 
-    echo "<h1>You've Been Added To The Base</h1>";
-}
+      $item->setOutputFormatting(false);
+      $item->name = $sanitizer->pageName($username);
+      $item->pass = $pass;
+      $item->email = $sanitizer->email($email);
+      $item->addRole('guest');
+      $item->save();
 
-  } else {
-  echo "<h1>Add Data</h1>";
-}
- ?>
+      echo "<h1>You've Been Added To The DataBase</h1>";
+  }
+
+          } else {
+
+            echo "<h1>Fill The Fields</h1>";
+        }
+
+      } else {
+
+        echo 'Invalid E-MAIL FORMAT';
+      }
+
+  }
+?>
    <?php endif; ?>
 </div>
