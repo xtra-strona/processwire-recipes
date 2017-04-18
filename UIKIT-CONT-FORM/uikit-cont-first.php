@@ -8,7 +8,7 @@
   // Create Field Type E-Mail => my_mail
   if($page->my_mail !='') {
     $your_mail = $sanitizer->email($page->my_mail);
-   echo "Mail Exsist" . '<br />';
+  // echo "Mail Exsist" . '<br />';
   }
 
 //Change Your Subject
@@ -16,7 +16,7 @@
   // Create Field Type Text => my_subject
   if($page->my_subject !='') {
      $my_subject = $sanitizer->text($page->my_subject);
-   echo "Subject Exsist" . '<br />';
+  // echo "Subject Exsist" . '<br />';
   }
 
 //Change Your Succ Message
@@ -24,7 +24,7 @@
   // Create Field Type Text => success_m
   if($page->success_m !='') {
      $success_m = $page->success_m;
-  echo "Success Message Exsist " . '<br />';
+ // echo "Success Message Exsist " . '<br />';
 }
 
   // form was submitted so we process the form
