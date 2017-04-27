@@ -32,9 +32,33 @@
 
   // when processing form (POST request), check to see if token is present
   $out = '';
-
   // create a new form field (also field wrapper)
   $form = $modules->get("InputfieldForm");
+
+// https://processwire.com/talk/topic/2089-create-simple-forms-using-api/?page=6
+
+  $form->setMarkup(array(
+  'list' => "<div {attrs}>{out}</div>",
+  'item' => "<div {attrs}>{out}</div>",
+  'item_label' => "<label class='uk-form-label' for='{for}'>{out}</label>",
+  'item_content' => "{out}",
+  'item_error' => "<p>{out}</p>",
+  'item_description' => "<p>{out}</p>",
+  'item_head' => "<h2>{out}</h2>",
+  'item_notes' => "<p class='notes'>{out}</p>",
+));
+
+$form->setClasses(array(
+  'list' => '[list-class]',
+  'list_clearfix' => '',
+  'item' => '{class}',
+  'item_required' => '',
+  'item_error' => 'uk-alert-danger uk-padding-small',
+  'item_collapsed' => '',
+  'item_column_width' => '',
+  'item_column_width_first' => ''
+));
+
   $form->action = "./";
   $form->method = "post";
   $form->attr("id+name",'contact-form');
@@ -59,7 +83,7 @@
   $field->label = "Subject";
   $field->attr('id+name','subject');
   $field->required = 1;
-  $field->setAttribute('size', 3);
+  $field->setAttribute('rows', 5);
   $field->addClass('uk-textarea');
   $form->append($field); // append the field to the form
 
