@@ -65,7 +65,7 @@ $form->setClasses(array(
 
   // create a text input
   $field = $modules->get("InputfieldText");
-  $field->label = "Imie";
+  $field->label = "Name";
   $field->attr('id+name','name');
   $field->required = 1;
   $field->addClass('uk-input');
@@ -84,13 +84,13 @@ $form->setClasses(array(
   $field->label = "Subject";
   $field->attr('id+name','subject');
   $field->required = 1;
-  $field->setAttribute('rows', 3);
+  $field->setAttribute('rows', 5);
   $field->addClass('uk-textarea');
   $form->append($field); // append the field to the form
 
   // oh a submit button!
   $submit = $modules->get("InputfieldSubmit");
-  $submit->attr("value","Wyślij");
+  $submit->attr("value","Submit");
   $submit->attr("id+name","submit");
   $submit->addClass('uk-button uk-button-primary uk-margin-top');
   $form->append($submit);
@@ -100,9 +100,6 @@ $form->setClasses(array(
 
       // user submitted the form, process it and check for errors
       $form->processInput($input->post);
-
-      // here is a good point for extra/custom validation and manipulate fields
-      $email = $form->get("email");
 
       if($form->getErrors()) {
 
