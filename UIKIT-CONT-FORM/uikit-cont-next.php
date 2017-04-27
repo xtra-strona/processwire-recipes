@@ -65,7 +65,7 @@ $form->setClasses(array(
 
   // create a text input
   $field = $modules->get("InputfieldText");
-  $field->label = "Name";
+  $field->label = "Imie";
   $field->attr('id+name','name');
   $field->required = 1;
   $field->addClass('uk-input');
@@ -79,17 +79,18 @@ $form->setClasses(array(
   $field->addClass('uk-input');
   $form->append($field); // append the field
 
+// create textarea field
   $field = $modules->get("InputfieldTextarea");
   $field->label = "Subject";
   $field->attr('id+name','subject');
   $field->required = 1;
-  $field->setAttribute('rows', 5);
+  $field->setAttribute('rows', 3);
   $field->addClass('uk-textarea');
   $form->append($field); // append the field to the form
 
   // oh a submit button!
   $submit = $modules->get("InputfieldSubmit");
-  $submit->attr("value","Submit");
+  $submit->attr("value","Wyślij");
   $submit->attr("id+name","submit");
   $submit->addClass('uk-button uk-button-primary uk-margin-top');
   $form->append($submit);
@@ -121,6 +122,8 @@ $form->setClasses(array(
 
 if($name && $email && $subject == true) {
 
+echo  $success_m  . '<br />';
+
   echo "<h3>Name: $name</h3>";
   echo "<h3>E-Mail: $email</h3>";
   echo "<h3>Subject: $subject</h3>";
@@ -131,8 +134,6 @@ $message = $mail->new();
 $message->to($your_mail)->from($your_mail);
 $message->subject($my_subject)->body("Name: $name, E-Mail: $email, Subject: $subject")->bodyHTML("<h4>Name: $name</h4> <h4>E-Mail: $email</h4> <h4>Subject: </h4> <p>$subject</p>");
 $numSent = $message->send();
-
-echo  $out .= "<p>Thanks! Your submission was successful.";
 
 } else {
 
