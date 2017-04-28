@@ -161,9 +161,9 @@
        }
 
         if($genre != '') {
-           $my_gat = $sanitizer->int($input->get->gatunek);
+           $my_genre = $sanitizer->int($input->get->film_genre);
        } else {
-           $my_gat = '';
+           $my_genre = '';
        }
 
       if($search != '') {
@@ -172,6 +172,6 @@
            $my_search = '';
        }
 
-echo ukPagination($children_movie, array('previous'=>'Previous','next'=>'Next','getVars' => array('gatunek' => $my_gat,'directors' => $my_dir, 'search' => $my_search)));?>
+echo ukPagination($children_movie, array('previous'=>'Previous','next'=>'Next','getVars' => array('film_genre' => $my_genre,'directors' => $my_dir, 'search' => $my_search)));?>
 
 </main>
