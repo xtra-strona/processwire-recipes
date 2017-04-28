@@ -21,7 +21,7 @@
          $all_options = $film_genre->type->getOptions($film_genre);
 
 // Creatre Directors, Director Template (directors.php, director.php) and page name Directors
-// Create Page Reference Field ( reference_directors ) with Reference to directors.php 
+// Create Page Reference Field ( reference_directors ) with Reference to directors.php
  $all_directors = $pages->get("/directors/")->children;
 
   //https://processwire.com/api/variables/sanitizer/
@@ -69,7 +69,7 @@
                     <div class='uk-margin-left'>
 
                              <ul class='uk-subnav uk-subnav-divider'>
-                                 <li><b>Gatunek:</b></li>
+                                 <li><b>Genre:</b></li>
                                      <?php  $genre = $movies->film_genre;
 
                                           foreach ($genre as $value) {
