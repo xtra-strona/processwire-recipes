@@ -31,22 +31,37 @@
 
  // https://processwire.com/api/selectors/
         if($dir != '') {
-           $dir = "reference_directors.name=$dir";
+           $dir = "reference_directors.name=$dir,";
+       } else {
+         $dir = '';
        }
 
         if($genre != '') {
-           $genre = "film_genre=$genre";
+           $genre = "film_genre=$genre,";
+       } else {
+         $genre = '';
        }
 
-//Search Results
+//Find Movie
  // https://processwire.com/api/selectors/
- // $children_movie = $page->children("template=single-movie, body|title%=$search, $dir, $genre, limit=4");
- // $children_movie = $pages->find("template=single-movie, body|title%=$search, $dir, $genre, limit=3");
-        $children_movie = $page->children("body|title%=$search, $dir, $genre, limit=1");
+   // $children_movie = $page->children("template=movie, body|title%=$search, $dir $genre limit=4");
+   //$children_movie = $pages->find("template=movie, body|title%=$search, $dir $genre limit=7");
 
+//SEARCH
+   $children_movie = $page->children("body|title%=$search, $dir $genre limit=7");
 
+//EXAMPLE RESULTS
+echo '<div class="uk-alert-primary" uk-alert>';
+     echo "<h3>FIND:  body|title%=$search, $dir $genre limit=7 </h3>";
+echo '</div>';
+
+//COUNT
    if(count($children_movie) == 0) {
+
+     echo '<div class="uk-alert-danger" uk-alert>';
         echo '<h1>No Movie</h1>';
+     echo '</div>';
+
    }
  ?>
 
@@ -142,7 +157,7 @@
 
     </fieldset>
 
-        <input type='submit' class="uk-button uk-button-default" value='Submit' name='sub'>
+        <input type='submit' class="uk-button uk-button-default" value='Submit'>
 
 </form>
 
@@ -171,7 +186,10 @@
        } else {
            $my_search = '';
        }
-
-echo ukPagination($children_movie, array('previous'=>'Previous','next'=>'Next','getVars' => array('film_genre' => $my_genre,'directors' => $my_dir, 'search' => $my_search)));?>
+// PAGINATION WITH getVars
+echo ukPagination($children_movie, array('previous'=>'Previous','next'=>'Next','getVars' => array('film_genre' => $my_genre,'directors' => $my_dir, 'search' => $my_search)));
+// PAGINATION WITHOUT getVars
+// echo ukPagination($children_movie, array('previous'=>'Previous','next'=>'Next'));
+?>
 
 </main>
